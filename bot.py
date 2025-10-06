@@ -68,9 +68,8 @@ class MyClient(discord.Client):
     async def on_ready(self):
         print(f"✅ Logged in as {client.user}")
         try:
-            guild = discord.Object(id=868216102944133181)
-            synced = await self.tree.sync(guild=guild)
-            print(f"Synced {len(synced)} commands to guild {guild.id}")
+            synced = await self.tree.sync()
+            print(f"Synced {len(synced)} commands globally")
 
         except Exception as e:    
             print(f"Error syncing: {e}")
@@ -495,8 +494,7 @@ async def reset_leaderboard(interaction: discord.Interaction):
 @client.tree.command(
     name="tournament",
     description="Start a tournament (4, 8, or 16 players)",
-    guild=GUILD_ID
-)
+   )
 @app_commands.describe(
     size="Number of players: 4, 8, or 16"
 )
